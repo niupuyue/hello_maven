@@ -1,11 +1,70 @@
 package com.paulniu.domain;
 
+import java.io.Serializable;
+
 /**
  * author:niupuyue
  * date: 2019/10/28
  * time: 23:43
- * version:
+ * version: 旅游路线图片实体类
  * desc:
  **/
-public class RouteImg {
+public class RouteImg implements Serializable {
+
+    private int rgid;//商品图片id
+    private int rid;//旅游商品id
+    private String bigPic;//详情商品大图
+    private String smallPic;//详情商品小图
+
+    public RouteImg() {
+    }
+
+    public RouteImg(int rgid, int rid, String bigPic, String smallPic) {
+        this.rgid = rgid;
+        this.rid = rid;
+        this.bigPic = bigPic;
+        this.smallPic = smallPic;
+    }
+
+    public int getRgid() {
+        return rgid;
+    }
+
+    public void setRgid(int rgid) {
+        this.rgid = rgid;
+    }
+
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
+
+    public String getBigPic() {
+        return bigPic;
+    }
+
+    public void setBigPic(String bigPic) {
+        this.bigPic = bigPic;
+    }
+
+    public String getSmallPic() {
+        return smallPic;
+    }
+
+    public void setSmallPic(String smallPic) {
+        this.smallPic = smallPic;
+    }
+
+    @Override
+    public String toString() {
+        return "RouteImg{" +
+                "rgid=" + rgid +
+                ", rid=" + rid +
+                ", bigPic='" + bigPic + '\'' +
+                ", smallPic='" + smallPic + '\'' +
+                '}';
+    }
 }
