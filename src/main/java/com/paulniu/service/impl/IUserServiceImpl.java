@@ -34,7 +34,7 @@ public class IUserServiceImpl implements UserService {
         // 设置激活码
         user.setCode(UUIDUtils.getUuid());
         // 设置激活状态
-        user.setStatus("N");
+        user.setStatus("Y");
         int count = userDao.save(user);
         if (count > 0) {
             // 发送激活邮件

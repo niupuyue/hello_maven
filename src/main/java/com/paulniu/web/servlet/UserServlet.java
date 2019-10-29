@@ -74,7 +74,7 @@ public class UserServlet extends BaseServlet {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(info);
         // 将json数据写回客户端
-        response.setContentType("application/json;charset=utf-8");
+        response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(json);
     }
 

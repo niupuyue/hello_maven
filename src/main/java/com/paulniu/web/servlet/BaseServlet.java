@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-@WebServlet(name = "BaseServlet")
+
 public class BaseServlet extends HttpServlet {
 
     @Override
@@ -45,7 +45,7 @@ public class BaseServlet extends HttpServlet {
      */
     public void writeValue(Object object, HttpServletResponse response) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json;charset=utf-8");
+        response.setContentType("application/json;charset=UTF-8");
         mapper.writeValue(response.getOutputStream(), object);
     }
 
