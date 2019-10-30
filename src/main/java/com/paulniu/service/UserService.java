@@ -1,5 +1,7 @@
 package com.paulniu.service;
 
+import com.paulniu.domain.PageBean;
+import com.paulniu.domain.Route;
 import com.paulniu.domain.User;
 
 /**
@@ -21,4 +23,9 @@ public interface UserService {
     boolean activie(String code);
 
     User login(User user);
+
+    /**
+     * 查询用户所有的搜藏
+     */
+    PageBean<Route> myfavorite(int uid,int currentPage ,int pageSize);
 }

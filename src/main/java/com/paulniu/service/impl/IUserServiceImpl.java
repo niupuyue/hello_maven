@@ -2,9 +2,13 @@ package com.paulniu.service.impl;
 
 import com.paulniu.dao.UserDao;
 import com.paulniu.dao.impl.IUserDaoImpl;
+import com.paulniu.domain.PageBean;
+import com.paulniu.domain.Route;
 import com.paulniu.domain.User;
 import com.paulniu.service.UserService;
 import com.paulniu.util.UUIDUtils;
+
+import java.util.List;
 
 /**
  * author:niupuyue
@@ -73,5 +77,24 @@ public class IUserServiceImpl implements UserService {
     @Override
     public User login(User user) {
         return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    }
+
+    @Override
+    public PageBean<Route> myfavorite(int uid, int currentPage, int pageSize) {
+        // 封装PageBean
+        PageBean<Route> pageBean = new PageBean<>();
+        // 设置当前页码
+        pageBean.setCurrentPage(currentPage);
+        // 设置每页显示的条数
+        pageBean.setPageSize(pageSize);
+
+        // 设置总条数
+        int totalCount = userDao.findFavoriteTotalCount(uid);
+        pageBean.setTotalCount(totalCount);
+        // 设置单页面显示数据集合
+        int start = (currentPage - 1) * pageSize;// 开始记录数
+        List<Route> list = userDao.myFavorite(uid,start,pageSize);
+        pageBean.setList(list);
+        return pageBean;
     }
 }

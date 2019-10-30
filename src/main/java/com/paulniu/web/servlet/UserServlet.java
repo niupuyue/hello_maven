@@ -2,7 +2,9 @@ package com.paulniu.web.servlet;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.paulniu.domain.PageBean;
 import com.paulniu.domain.ResultInfo;
+import com.paulniu.domain.Route;
 import com.paulniu.domain.User;
 import com.paulniu.service.UserService;
 import com.paulniu.service.impl.IUserServiceImpl;
@@ -184,6 +186,35 @@ public class UserServlet extends BaseServlet {
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write(msg);
         }
+    }
+
+    public void myfavorite(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        // 参数
+        String currentPageStr = request.getParameter("currentPage");
+        String pageSizeStr = request.getParameter("pageSize");
+        User user = (User) request.getSession().getAttribute("user");
+        int uid = 0;
+        if (user != null){
+            uid = user.getUid();
+        }
+
+        // 当前页码，如果不传，默认第一页
+        int currentPage = 0;
+        if (currentPageStr != null && currentPageStr.length() > 0) {
+            currentPage = Integer.parseInt(currentPageStr);
+        } else {
+            currentPage = 1;
+        }
+
+        // 每页显示条数，如果不传递默认每页显示10条记录
+        int pageSize = 0;
+        if (pageSizeStr != null && pageSizeStr.length() > 0) {
+            pageSize = Integer.parseInt(pageSizeStr);
+        } else {
+            pageSize = 10;
+        }
+        PageBean<Route> myfavorite = service.myfavorite(user.getUid(),currentPage,pageSize);
+        writeValue(myfavorite,response);
     }
 
 }

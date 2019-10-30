@@ -1,6 +1,9 @@
 package com.paulniu.dao;
 
+import com.paulniu.domain.Route;
 import com.paulniu.domain.User;
+
+import java.util.List;
 
 /**
  * author:niupuyue
@@ -28,5 +31,9 @@ public interface UserDao {
     void updateStatus(User user);
 
     User findByUsernameAndPassword(String username,String password);
+
+    int findFavoriteTotalCount(int uid);
+
+    List<Route> myFavorite(int uid,int start,int pageSize);
 
 }
