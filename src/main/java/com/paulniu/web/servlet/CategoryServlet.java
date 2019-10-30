@@ -24,7 +24,7 @@ public class CategoryServlet extends BaseServlet {
      * @throws IOException
      */
     public void findAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Category> cs = service.findAll();
+        List<Category> cs = service.findAll(false);
         writeValue(cs, response);
     }
 

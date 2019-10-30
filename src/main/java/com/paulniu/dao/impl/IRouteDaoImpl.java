@@ -26,8 +26,20 @@ public class IRouteDaoImpl implements RouteDao {
             params.add(cid);
         }
         if (rname != null && rname.length() > 0) {
-            sb.append(" and rname like ? ");
-            params.add("%" + rname + "%");
+            String[] tags = rname.split("/");
+            if (tags.length > 0) {
+                for (int i = 0; i < tags.length; i++) {
+                    if (i == 0) {
+                        sb.append(" and rname like ? ");
+                    } else {
+                        sb.append(" or rname like ? ");
+                    }
+                    params.add("%" + tags[i] + "%");
+                }
+            } else {
+                sb.append(" and rname like ? ");
+                params.add("%" + rname + "%");
+            }
         }
         sql = sb.toString();
         return template.queryForObject(sql, Integer.class, params.toArray());
@@ -44,8 +56,20 @@ public class IRouteDaoImpl implements RouteDao {
             params.add(cid);
         }
         if (rname != null && rname.length() > 0) {
-            sb.append(" and rname like ? ");
-            params.add("%" + rname + "%");
+            String[] tags = rname.split("/");
+            if (tags.length > 0) {
+                for (int i = 0; i < tags.length; i++) {
+                    if (i == 0) {
+                        sb.append(" and rname like ? ");
+                    } else {
+                        sb.append(" or rname like ? ");
+                    }
+                    params.add("%" + tags[i] + "%");
+                }
+            } else {
+                sb.append(" and rname like ? ");
+                params.add("%" + rname + "%");
+            }
         }
         // 分页条件
         sb.append(" limit ? , ?");

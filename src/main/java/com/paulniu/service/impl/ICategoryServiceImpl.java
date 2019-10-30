@@ -20,12 +20,12 @@ public class ICategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao = new ICategoryDaoImpl();
 
     @Override
-    public List<Category> findAll() {
+    public List<Category> findAll(boolean isFromRedis) {
         // 先从redis中查询数据
         Jedis jedis = JedisUtils.getJedis();
         Set<Tuple> categorys = jedis.zrangeWithScores("category",0,-1);
         List<Category> cs = null;
-        if (categorys == null || categorys.size() == 0){
+        if (categorys == null || categorys.size() == 0 || !isFromRedis){
             System.out.println("从数据库中查询");
             cs = categoryDao.findAll();
             for (int i=0;i<cs.size();i++){
